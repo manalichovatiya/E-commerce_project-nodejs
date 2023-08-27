@@ -14,33 +14,13 @@ router.post(
 /** Get user list */
 router.get(
   "/list",
-  userController.getUserList
-);
-
-/** Get user details by id */
-router.get(
-  "/get-details/:userId",
-  userController.getUserDetails
-);
-
-/** user details update by id */
-router.put(
-  "/update-details/:userId",
-  validate(userValidation.updateDetails),
-  userController.updateDetails
+  userController.getAlldata
 );
 
 /** Delete user */
 router.delete(
   "/delete-user/:userId",
   userController.deleteUser
-);
-
-/** Send mail */
-router.post(
-  "/send-mail",
-  validate(userValidation.sendMail),
-  userController.sendMail
 );
 
 module.exports = router;

@@ -1,14 +1,13 @@
-const { userService, emailService } = require("../services");
+const { userService , categoryService , productService } = require("../services");
 
 /** create user */
 const createUser = async (req, res) => {
   try {
     const reqBody = req.body;
-
-    // const userExists = await userService.getUserByEmail(reqBody.email);
-    // if (userExists) {
-    //   throw new Error("User already created by this email!");
-    // }
+    const userExists = await userService.getUserByEmail(reqBody.email);
+    if (userExists) {
+      throw new Error("User already created by this email!");
+    }
 
     const user = await userService.createUser(reqBody);
     if (!user) {
@@ -66,24 +65,6 @@ const getUserDetails = async (req, res) => {
   }
 };
 
-/** user details update by id */
-const updateDetails = async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const userExists = await userService.getUserById(userId);
-    if (!userExists) {
-      throw new Error("User not found!");
-    }
-
-    await userService.updateDetails(userId, req.body);
-
-    res.status(200)
-      .json({ success: true, message: "User details update successfully!" });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-};
-
 /** Delete user */
 const deleteUser = async (req, res) => {
   try {
@@ -103,29 +84,39 @@ const deleteUser = async (req, res) => {
   }
 };
 
-/** Send mail to reqested email */
-const sendMail = async (req, res) => {
+/**All data */
+const getAlldata  = async(req,res) => {
   try {
-    const reqBody = req.body;
-    const sendEmail = await emailService.sendMail(
-      reqBody.email,
-      reqBody.subject,
-      reqBody.text
-    );
-    if (!sendEmail) {
-      throw new Error("Something went wrong, please try again or later.");
-    }
-    res.status(200)
-      .json({ success: true, message: "Email send successfully!" });
+      const userlist = await userService.getUserList();
+      if(!userlist){
+        throw new Error("No user data found -!- ");
+      }
+      const categorylist = await categoryService.getCategoryList();
+      if(!categorylist){
+        throw new Error("No Category data not found -!- ");
+      }
+      const productlist = await productService.getProductList();
+      if(!productlist){
+        throw new Error("No Product data not found -!- ");
+      }
+      res.status(200).json({
+          success:true,
+          message:"All data dispatch successfully",
+          userData: userlist,
+          categoryData: categorylist,
+          productData: productlist,
+      });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+      res.status(400).json({
+          success:false,
+          message: error.message,
+      });
   }
-};
+}
 module.exports = {
   createUser,
   getUserList,
   getUserDetails,
-  updateDetails,
   deleteUser,
-  sendMail,
+  getAlldata,
 };

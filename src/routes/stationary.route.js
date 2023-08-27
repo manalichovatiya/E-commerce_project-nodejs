@@ -20,7 +20,6 @@ router.get(
 /** Delete Stationary */
 router.delete(
   "/delete-Stationary/:StationaryId",
-  validate(stationaryValidation.getDetails),
   stationaryController.deleteStationary
 );
 

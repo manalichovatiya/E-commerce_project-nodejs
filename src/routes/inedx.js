@@ -11,6 +11,7 @@ const pharmacyRoute = require("./pharmacy.route");
 const schoolRoute = require("./school.route");
 const stationaryRoute = require("./stationary.route");
 const travelRoute = require("./travel.route");
+const productRoute = require("./product.route");
 
 const router = express.Router();
 
@@ -26,5 +27,6 @@ router.use("/pharmacy", pharmacyRoute);
 router.use("/school", schoolRoute);
 router.use("/stationary", stationaryRoute);
 router.use("/travel", travelRoute);
+router.use("/product", productRoute);
 
 module.exports = router;

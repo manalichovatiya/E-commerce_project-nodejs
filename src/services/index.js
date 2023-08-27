@@ -10,3 +10,4 @@ module.exports.pharmacyService = require("./pharmacy.service");
 module.exports.schoolService = require("./school.service");
 module.exports.stationaryService = require("./stationary.service");
 module.exports.travelService = require("./travel.service");
+module.exports.productService = require("./product.service");
