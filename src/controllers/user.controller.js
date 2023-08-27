@@ -23,29 +23,29 @@ const createUser = async (req, res) => {
   }
 };
 
-/** Get user list */
-const getUserList = async (req, res) => {
-  try {
-    const { search, ...options } = req.query;
-    let filter = {};
+// /** Get user list */
+// const getUserList = async (req, res) => {
+//   try {
+//     const { search, ...options } = req.query;
+//     let filter = {};
 
-    if (search) {
-      filter.$or = [
-        { first_name: { $regex: search, $options: "i" } },
-        { last_name: { $regex: search, $options: "i" } },
-      ];
-    }
-    const getList = await userService.getUserList(filter, options);
+//     if (search) {
+//       filter.$or = [
+//         { first_name: { $regex: search, $options: "i" } },
+//         { last_name: { $regex: search, $options: "i" } },
+//       ];
+//     }
+//     const getList = await userService.getUserList(filter, options);
 
-    res.status(200).json({
-      success: true,
-      message: "Get user list successfully!",
-      data: getList,
-    });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-};
+//     res.status(200).json({
+//       success: true,
+//       message: "Get user list successfully!",
+//       data: getList,
+//     });
+//   } catch (error) {
+//     res.status(400).json({ success: false, message: error.message });
+//   }
+// };
 
 /** Get user details by id */
 const getUserDetails = async (req, res) => {
@@ -115,7 +115,6 @@ const getAlldata  = async(req,res) => {
 }
 module.exports = {
   createUser,
-  getUserList,
   getUserDetails,
   deleteUser,
   getAlldata,
