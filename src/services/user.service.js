@@ -15,7 +15,7 @@ const createUser = async (reqBody) => {
  * @param {object} options
  * @returns {Promise<Users>}
  */
-const getUserList = async (filter, options) => {
+const getUserList = async () => {
   // const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
 
   return Users.find();

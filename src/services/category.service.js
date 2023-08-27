@@ -15,8 +15,9 @@ const createCategory = async (reqBody) => {
  * @param {object} options
  * @returns {Promise<Category>}
  */
-const getCategoryList = async (filter,options) => {
+const getCategoryList = async () => {
     // const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+
     return Category.find();
 };
 /**
